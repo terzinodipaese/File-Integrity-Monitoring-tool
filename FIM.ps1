@@ -30,10 +30,11 @@ $response = Read-Host -Prompt "Please enter 'A' or 'B'"
 Write-Host ""
 
 if ($response -eq "A".ToUpper()) {
-    # Delete baseline.txt if it already exists
+    # Delete baseline.txt and baselinesize.txt if they already exist
     Erase-Baseline-If-Already-Exists
 
     # Calculate Hash from the target files and store in baseline.txt
+    # Calculate Size from the target files and store in baselinesize.txt
     # Collect all files in the target folder
     $files = Get-ChildItem -Path .\Files
 
@@ -53,7 +54,8 @@ elseif ($response -eq "B".ToUpper()) {
     $fileHashDictionary = @{}
     $fileSizeDictionary = @{}
 
-    # Load file|hash|size from baseline.txt and store them in a dictionary
+    # Load file|hash from baseline.txt and store them in a dictionary
+    # Load file|size from baselinesize.txt and store them in another dictionary
     $filePathsAndHashes = Get-Content -Path .\baseline.txt
     $filePathsAndSizes = Get-Content -Path .\baselinesize.txt
     
